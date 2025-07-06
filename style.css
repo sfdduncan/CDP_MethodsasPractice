@@ -1,0 +1,79 @@
+* { 
+    font-family: 'Space-Mono-regular', monospace; /* Sets a monospaced font for the entire document */
+    
+}
+
+/* This is from stack overflow -- thank you stack overflow! */
+/*https://stackoverflow.com/questions/55364127/making-a-dotted-grid-with-css*/
+body {
+  background: white;
+  background-image: radial-gradient(black 1px, transparent 0);
+  background-size: 30px 30px;
+  background-position: -19px -19px;
+}
+
+img {
+  display: block; /* Ensures the image is treated as a block element */
+  margin: 0 auto; /* Centers the image horizontally */
+  max-width: 50%; /* Makes the image responsive */
+  height: auto; /* Maintains aspect ratio */
+  border-color: black; 
+  border: 2px solid black;
+}
+
+/* Two image containers*/
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 5px;
+}
+mark {
+    background-color: rgb(168, 238, 255);
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600; 
+  margin-top: 50px;
+}
+
+p {
+    margin: 30px; 
+    line-height: 1.25;
+    background: white;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+
+/* Font styles for Space Mono */
+
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
