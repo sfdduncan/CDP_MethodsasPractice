@@ -1,31 +1,4 @@
-function revealOnScroll() {
-  const images = d3.selectAll(".circle-img");
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const element = d3.select(entry.target);
-      if (entry.isIntersecting) {
-        element.classed("visible", true);
-      } else {
-        element.classed("visible", false); // reverse animation
-      }
-    });
-  }, {
-    threshold: 0.4
-  });
-
-  images.each(function () {
-    observer.observe(this);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", revealOnScroll);
-
-
-const typewriterText = `In a larger sense, Lauren Lee McCarthy’s work is a digital reflection on care, code, and control. Her artistic practice investigates the technological systems that increasingly shape and mediate our most intimate relationships, from parenting and health to self-monitoring and public exposure. Through a range of formats including performances, exhibitions, and speculative design, McCarthy creates immersive scenarios that challenge viewers to confront how emotional labor and bodily autonomy are reshaped by digital tools. The project is composed of several distinct pieces, such as Surrogate, Womb Walk, and What is Data?, each of which explores a different facet of how technology interacts with the body. Rather than offering solutions, McCarthy invites discomfort and reflection, revealing the quiet negotiations that occur when care is managed through systems of observation and control.`;
-
-let typed = false;
-
+// Typewriter effect for a single element
 function typeWriterEffect(element, text, speed = 20) {
   let i = 0;
   function type() {
@@ -38,20 +11,57 @@ function typeWriterEffect(element, text, speed = 20) {
   type();
 }
 
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return (
-    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.bottom >= 0
-  );
+function revealOnScroll() {
+  const images = d3.selectAll(".circle-img");
+  const typewriterParagraphs = document.querySelectorAll("p.typewriter");
+
+  // === Image Observer: grow/shrink ===
+  const imageObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const el = d3.select(entry.target);
+      if (entry.isIntersecting) {
+        el.classed("visible", true);
+      } else {
+        el.classed("visible", false);
+      }
+    });
+  }, {
+    threshold: 0.4
+  });
+
+  images.each(function () {
+    imageObserver.observe(this);
+  });
+
+  // === Typewriter Paragraph Observer ===
+  const typedSet = new Set();
+
+  const paragraphObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const el = entry.target;
+
+      if (entry.isIntersecting && !typedSet.has(el)) {
+        const fullText = el.textContent;
+        el.textContent = "";
+        el.classList.add("visible");
+        typeWriterEffect(el, fullText);
+        typedSet.add(el);
+      }
+
+      // Optional: remove "visible" class if scrolling away
+      if (!entry.isIntersecting && typedSet.has(el)) {
+        el.classList.remove("visible");
+      }
+    });
+  }, {
+    threshold: 0.6
+  });
+
+  typewriterParagraphs.forEach(p => {
+    paragraphObserver.observe(p);
+  });
 }
 
-window.addEventListener('scroll', () => {
-  const intro = document.getElementById('intro');
-  const textElement = document.getElementById('typewriter-text');
-  if (!typed && isInViewport(intro)) {
-    typeWriterEffect(textElement, typewriterText);
-    typed = true;
-  }
-});
+document.addEventListener("DOMContentLoaded", revealOnScroll);
+
 

@@ -33,8 +33,22 @@ p {
   line-height: 1.25;
   background: white;
   border: 2px solid black;
+  border-radius: 15px;
   padding: 15px;
 }
+
+p.typewriter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  white-space: pre-wrap;
+}
+
+p.typewriter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* Top-level image (header) */
 body > img {
