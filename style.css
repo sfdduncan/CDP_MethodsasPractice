@@ -86,6 +86,10 @@ body > img {
   transition: all 0.8s ease;
 }
 
+iframe{
+  background-color: white !important;
+}
+
 /* Final visible state on scroll */
 .gallery .circle-img.visible {
   width: 300px;
