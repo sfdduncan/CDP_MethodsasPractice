@@ -106,3 +106,12 @@ iframe{
 }
 
 
+#d3-container-4 {
+  margin: 40px auto;                 /* Top and bottom spacing, center horizontally */
+  border: 3px solid #0306d0;         /* Same blue as .circle-img */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  background-color: blue;           /* Optional: consistent background */
+  width: fit-content;                /* Shrinks to fit content, or use a set width */
+}

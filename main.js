@@ -48,10 +48,7 @@ function revealOnScroll() {
         typedSet.add(el);
       }
 
-      // Optional: remove "visible" class if scrolling away
-      if (!entry.isIntersecting && typedSet.has(el)) {
-        el.classList.remove("visible");
-      }
+ 
     });
   }, {
     threshold: 0.6
